@@ -10,7 +10,6 @@ const amount = document.querySelector('[name="amount"]');
 form.addEventListener('submit', submitCreatePromises);
 
 function submitCreatePromises(e) {
-  
   e.preventDefault();
 
   let delay = firstDelayMs.valueAsNumber;
@@ -20,17 +19,13 @@ function submitCreatePromises(e) {
   for (let i = 1; i <= amountVal; i++) {
     createPromise(i, delay)
       .then(({ position, delay }) => {
-        Notiflix.Notify.success(
-          `✅ Fulfilled promise ${i} in ${delay}ms`
-        );
-    })
-    .catch(({ position, delay }) => {
-      Notiflix.Notify.failure(
-        `❌ Rejected promise ${i} in ${delay}ms`
-      );
-    });
-  delay += delayStepMsVal;
-}
+        Notiflix.Notify.success(`✅ Fulfilled promise ${i} in ${delay}ms`);
+      })
+      .catch(({ position, delay }) => {
+        Notiflix.Notify.failure(`❌ Rejected promise ${i} in ${delay}ms`);
+      });
+    delay += delayStepMsVal;
+  }
 }
 
 function createPromise(position, delay) {
